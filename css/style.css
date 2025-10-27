@@ -1,0 +1,851 @@
+/* 基本スタイルと共通レイアウト */
+:root {
+  --akinator-bg-start: #2a0d2a;
+  --akinator-bg-end: #5a2f4b;
+  --akinator-button: #4a2c2a;
+  --akinator-text: #f5e4a8;
+  --auth-bg: #fdf8e1;
+  --auth-header: #592a8a;
+  --auth-button: #c78a3c;
+  --auth-text-dark: #333;
+  --white: #ffffff;
+  --border-color: #ddd;
+  --brand-red: #D32F2F; /* テーマカラー（赤） */
+}
+
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Hiragino Kaku Gothic ProN", "Hiragino Sans", Meiryo, sans-serif;
+  background-color: #F4EEE8; /* sstyle.css に合わせて修正 */
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  min-height: 100vh;
+  padding: 20px 0;
+}
+
+.container {
+  width: 100%;
+  max-width: 375px;
+  min-height: 812px;
+  border: 1px solid #ccc;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  overflow: hidden;
+  background-color: var(--white); /* コンテナの背景を白に */
+}
+
+/* Akinator画面のスタイル (TOP, Question, Answer) */
+.akinator-screen {
+  color: var(--auth-text-dark);
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 20px;
+  position: relative;
+
+  /* 背景画像の設定 */
+  background-image: url('../images/akinator-background.png') !important;
+  background-color: transparent !important;
+  background-size: cover !important;
+  background-position: center !important;
+  background-repeat: no-repeat !important;
+}
+
+/* home-screen以外のakinator-screenに適用し、垂直中央揃えにする */
+.akinator-screen:not(.home-screen) {
+  justify-content: center;
+}
+
+.akinator-header {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 0px;
+  margin-bottom: 20px;
+  color: var(--auth-text-dark);
+  font-size: 16px;
+  font-weight: 600;
+}
+.akinator-header .user-icon { font-size: 24px; }
+.akinator-header .home-icon { font-size: 24px; text-decoration: none; color: var(--auth-text-dark); }
+.title-image { width: 90%; max-width: 300px; height: auto; margin-top: 0px; margin-bottom: 10px; }
+.genie-image { width: 180px; height: auto; margin-top: 30px; }
+.challenge-button {
+  background-color: var(--brand-red);
+  color: var(--white);
+  border: none;
+  border-radius: 25px;
+  padding: 12px 30px;
+  font-size: 18px;
+  font-weight: bold;
+  cursor: pointer;
+  margin-top: 40px;
+  text-decoration: none;
+}
+.sub-text { margin-top: 15px; font-size: 14px; }
+.question-box, .result-box {
+  background-color: #f7f7f7;
+  border: 1px solid #e0e0e0;
+  border-radius: 10px;
+  padding: 20px;
+  margin: 20px 0;
+  width: 90%;
+}
+.question-box h2 { margin: 0 0 px 0; font-size: 16px; }
+.question-box p { margin: 0; font-size: 24px; font-weight: bold; }
+.answer-options { width: 100%; display: flex; flex-direction: column; gap: 15px; }
+.answer-options .btn {
+  background-color: var(--brand-red);
+  color: var(--white);
+  border: none;
+  border-radius: 8px;
+  padding: 15px;
+  font-size: 18px;
+  cursor: pointer;
+  text-decoration: none;
+}
+.result-box p { margin: 0 0 10px 0; font-size: 14px; }
+.result-box h3 { margin: 0; font-size: 22px; font-weight: bold; }
+.result-box .distance { font-size: 14px; margin-top: 5px; }
+.result-actions { display: flex; flex-direction: column; gap: 15px; width: 100%; margin-top: 20px; }
+.result-actions .btn { padding: 15px; border-radius: 8px; font-size: 16px; font-weight: bold; cursor: pointer; border: none; text-decoration: none; }
+.result-actions .btn-primary { background-color: var(--brand-red); color: var(--white); }
+.result-actions .btn-secondary { background-color: var(--white); color: var(--brand-red); border: 1px solid var(--brand-red); }
+.result-card { background-color: var(--white); color: var(--auth-text-dark); border-radius: 10px; overflow: hidden; margin: 20px 0; text-align: left; border: 1px solid #e0e0e0; }
+.result-card img { width: 100%; height: 180px; object-fit: cover; display: block; }
+.result-card-info { padding: 15px; }
+.result-card-info .name { font-size: 18px; font-weight: bold; margin: 0; }
+.result-card-info .details { font-size: 12px; color: #666; margin: 5px 0; }
+.result-card-info .price { font-size: 16px; font-weight: bold; color: var(--auth-text-dark); margin-top: 10px; }
+.home-screen { justify-content: center; padding-top: 20px; }
+
+/* MyPage画面のスタイル */
+.auth-screen { display: flex; flex-direction: column; flex-grow: 1; }
+.auth-header.mypage-header {
+  background-color: var(--white);
+  color: var(--auth-text-dark);
+  text-align: center;
+  padding: 20px;
+  border-bottom: 1px solid #f0f0f0;
+  position: relative;
+}
+.header-profile { display: flex; flex-direction: column; align-items: center; }
+.mypage-header h1 { margin: 10px 0 0 0; font-size: 20px; }
+
+/* マイページのログアウトアイコン画像 - sstyle.cssに合わせて修正 */
+.header-home-icon { position: absolute; top: 20px; right: 20px; font-size: 24px; color: var(--auth-text-dark); text-decoration: none; }
+.header-home-icon .logout-icon {
+  width: 20px;
+  height: 20px;
+}
+/* 元の style.css の .header-home-icon の定義は削除または上書きされました */
+
+.mypage-icon {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background-color: #e0e0e0;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 30px;
+  color: #888;
+}
+.auth-body {
+  background-color: var(--white);
+  flex-grow: 1;
+  padding: 30px 25px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+.new-form-group { margin-bottom: 25px; }
+.new-form-group label { display: block; font-size: 14px; font-weight: bold; color: #555; margin-bottom: 8px; }
+.new-form-group label i { margin-right: 8px; }
+.new-form-group input {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 16px;
+  box-sizing: border-box;
+  background-color: var(--white);
+}
+.input-with-button { display: flex; align-items: center; gap: 10px; }
+.input-with-button input { flex-grow: 1; }
+.verification-button {
+  padding: 8px 10px;
+  font-size: 12px;
+  background-color: var(--white);
+  color: var(--brand-red);
+  border: 1px solid var(--brand-red);
+  border-radius: 5px;
+  cursor: pointer;
+  white-space: nowrap;
+}
+.history-button {
+  width: 100%;
+  margin: 20px auto;
+  padding: 15px;
+  border: 1px solid var(--brand-red);
+  border-radius: 8px;
+  background-color: var(--white);
+  color: var(--brand-red);
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+}
+.auth-button.save-button {
+  width: 100%;
+  margin-top: auto;
+  background-color: var(--brand-red);
+  color: var(--white);
+  border: none;
+  border-radius: 8px;
+  padding: 15px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+/* 新しいログイン・登録画面のスタイル (赤色テーマ) */
+.new-auth-screen { background-color: var(--white); padding: 20px; display: flex; flex-direction: column; flex-grow: 1; }
+.new-auth-header { text-align: center; padding: 20px 0; }
+.logo-placeholder { font-size: 24px; font-weight: bold; color: #333; }
+.tab-nav { display: flex; border-bottom: 1px solid #e0e0e0; }
+.tab-link { flex: 1; text-align: center; padding: 15px 10px; text-decoration: none; color: #888; font-weight: bold; border-bottom: 3px solid transparent; transition: all 0.2s ease; }
+.tab-link.active { color: var(--brand-red); border-bottom-color: var(--brand-red); }
+.tab-content { padding: 30px 0; }
+.tab-pane { display: none; }
+.tab-pane.active { display: block; }
+.password-wrapper { position: relative; }
+.password-wrapper input { padding-right: 40px; }
+.toggle-password { position: absolute; top: 50%; right: 15px; transform: translateY(-50%); cursor: pointer; color: #888; }
+.password-hint { font-size: 12px; color: #888; margin-top: 8px; }
+.auth-helpers { font-size: 12px; text-align: center; margin-bottom: 20px; }
+.auth-helpers a { color: var(--brand-red); text-decoration: none; }
+.checkbox-group { display: flex; align-items: center; justify-content: center; margin-bottom: 20px; }
+.checkbox-group input { margin-right: 8px; accent-color: var(--brand-red); }
+.checkbox-group label { font-size: 14px; }
+.new-auth-button {
+  width: 100%;
+  padding: 15px;
+  border: none;
+  border-radius: 8px;
+  background-color: var(--brand-red);
+  color: white;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+.new-auth-button:hover { background-color: #B71C1C; }
+.divider-or { text-align: center; color: #aaa; margin: 20px 0; }
+.social-login-section { text-align: center; }
+.social-login-section p { font-size: 14px; color: #555; margin-bottom: 15px; }
+.social-icons { display: flex; justify-content: center; gap: 20px; }
+.social-icons a { color: #333; font-size: 28px; text-decoration: none; }
+
+
+/* --- マイ履歴ページ --- */
+.page-header {
+  background-color: var(--white);
+  padding: 15px 20px;
+  text-align: center;
+  border-bottom: 1px solid #f0f0f0;
+  position: relative; /* ▼▼▼ 変更点 ▼▼▼ (ボタン配置のため) */
+}
+.page-header h1 { font-size: 18px; margin: 0; color: var(--auth-text-dark); }
+
+/* ▼▼▼ ここから追加 ▼▼▼ */
+/* ページヘッダーの戻るボタン (store_detail.php などで使用) */
+.header-back-button {
+  position: absolute;
+  top: 50%;
+  left: 20px; /* 左端からの距離 */
+  transform: translateY(-50%); /* 上下中央揃え */
+  font-size: 18px;
+  color: var(--auth-text-dark); /* ヘッダーの文字色と合わせる */
+  text-decoration: none;
+}
+/* ▲▲▲ ここまで追加 ▲▲▲ */
+
+.history-page {
+  padding: 20px;
+  background-color: #f7f7f7;
+  flex-grow: 1;
+}
+.section-title {
+  font-size: 14px;
+  color: var(--auth-text-dark);
+  margin: 0 0 15px 0;
+  font-weight: bold;
+}
+.history-list { display: flex; flex-direction: column; gap: 15px; }
+.history-card {
+  background-color: var(--white);
+  border-radius: 8px;
+  padding: 15px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+  position: relative;
+}
+.card-main-content { display: flex; gap: 15px; align-items: flex-start; }
+.card-image { width: 80px; height: 80px; border-radius: 8px; object-fit: cover; flex-shrink: 0; }
+.card-details { flex-grow: 1; min-width: 0; }
+.card-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 5px; }
+.status-tag { font-size: 10px; padding: 2px 8px; border-radius: 4px; font-weight: bold; }
+.status-tag.visited { background-color: #E8F5E9; color: #2E7D32; }
+.reservation-code { font-size: 12px; color: #888; }
+.card-title { font-size: 15px; font-weight: bold; margin: 0 0 8px 0; color: var(--auth-text-dark); }
+.card-access, .card-datetime { font-size: 12px; color: #666; margin: 4px 0 0 0; }
+.card-arrow { color: #ccc; font-size: 14px; align-self: center; }
+.favorite-star {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  font-size: 20px;
+  color: var(--brand-red);
+  cursor: pointer;
+  z-index: 10;
+}
+
+
+/* --- お気に入りページ --- */
+.favorites-page {
+  padding: 20px;
+  background-color: #f7f7f7;
+  flex-grow: 1;
+}
+.search-bar-container { display: flex; gap: 10px; align-items: center; margin-bottom: 20px; }
+.search-bar { position: relative; flex-grow: 1; }
+.search-bar i { position: absolute; left: 12px; top: 50%; transform: translateY(-50%); color: #aaa; }
+.search-bar input {
+  width: 100%;
+  padding: 10px 10px 10px 35px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-size: 14px;
+  box-sizing: border-box;
+}
+.filter-button {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  padding: 10px 12px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  background-color: var(--white);
+  cursor: pointer;
+  font-size: 14px;
+}
+.item-count { font-size: 14px; font-weight: bold; margin-bottom: 15px; color: var(--auth-text-dark); }
+.favorites-list { display: flex; flex-direction: column; gap: 15px; }
+.favorite-card {
+  display: flex;
+  gap: 15px;
+  background-color: var(--white);
+  padding: 15px;
+  border-radius: 8px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+  position: relative;
+}
+.fav-card-image { width: 80px; height: 80px; border-radius: 8px; object-fit: cover; flex-shrink: 0; }
+.fav-card-details { flex-grow: 1; min-width: 0; }
+.fav-card-category { font-size: 12px; color: #666; margin: 0 0 5px 0; }
+.fav-card-title {
+  font-size: 16px;
+  font-weight: bold;
+  margin: 0 0 8px 0;
+  color: var(--auth-text-dark);
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  line-clamp: 3; /* line-clampを最後に移動（sstyle.cssと同じ順序） */
+}
+.fav-card-info { display: flex; flex-direction: column; gap: 5px; font-size: 12px; color: #666; }
+.info-item i { margin-right: 5px; color: #aaa; width: 14px; }
+
+
+/* --- 固定フッターメニュー --- */
+.container > main { padding-bottom: 80px; }
+.fixed-footer {
+  width: 100%;
+  max-width: 375px;
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  background-color: var(--brand-red);
+  color: white;
+  padding: 8px 0;
+  border-radius: 20px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+  z-index: 1000;
+}
+.footer-item { display: flex; flex-direction: column; align-items: center; text-decoration: none; color: white; font-size: 10px; font-weight: bold; flex-grow: 1; }
+.footer-item i { font-size: 20px; margin-bottom: 4px; }
+.fixed-footer .footer-item { color: white; }
+@media (min-width: 415px) {
+    .fixed-footer {
+        bottom: 20px;
+    }
+}
+
+
+/* --- ▼▼▼ ここから追加 ▼▼▼ --- */
+
+/* --- お店情報詳細ページ --- */
+.store-detail-page {
+  padding: 20px;
+  background-color: #f7f7f7; /* マイ履歴 やお気に入り の背景色と統一 */
+  flex-grow: 1;
+}
+
+/* 情報セクション全体を囲うカード */
+.detail-section {
+  background-color: var(--white);
+  border-radius: 8px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+}
+
+/* 各情報アイテム（店名、住所など） */
+.detail-item {
+  display: flex;
+  padding: 18px 15px;
+  border-bottom: 1px solid #f0f0f0;
+  font-size: 14px;
+  align-items: flex-start; /* ラベルとコンテンツの上端を揃える */
+}
+.detail-item:last-child {
+  border-bottom: none;
+}
+
+/* 左側のラベル (店名, 住所...) */
+.item-label {
+  flex: 0 0 100px; /* ラベルの幅を100pxに固定 */
+  font-weight: bold;
+  color: #555; /* 画像の文字色に合わせる */
+  padding-top: 2px; /* 微調整 */
+}
+
+/* 右側のコンテンツ */
+.item-content {
+  flex: 1; /* 残りの幅すべてを利用 */
+  color: #333;
+  display: flex;
+  justify-content: space-between; /* 地図アイコンを右端に配置するため */
+  align-items: flex-start;
+  flex-wrap: wrap; /* 予約ボタンなどで改行を許容 */
+  line-height: 1.5;
+}
+
+/* コンテンツ内のテキスト部分 */
+.content-text {
+  flex: 1;
+  min-width: 150px; /* アイコンとの衝突を避ける */
+}
+
+/* 住所の地図アイコン */
+.map-icon {
+  font-size: 24px;
+  color: #555;
+  text-decoration: none;
+  padding-left: 10px;
+}
+
+/* 電話リンク */
+.item-content a {
+  color: #007bff; /* 標準的なリンク色 */
+  text-decoration: none;
+  font-weight: 500;
+}
+
+/* 営業時間などの複数行テキスト */
+.multi-line {
+  white-space: pre-wrap; /* HTML内の改行(\n)をそのまま表示 */
+  line-height: 1.6;
+  font-size: 13px; /* 画像に合わせて少し小さく */
+  color: #333;
+}
+
+/* 補足事項のテキスト (※～など) */
+.notice {
+  font-size: 12px;
+  color: #666;
+  margin-top: 10px;
+  line-height: 1.5;
+}
+
+/* 店舗詳細ページの画像スタイル */
+.detail-store-image {
+  width: 100%; /* 親要素(item-content)の幅に合わせる */
+  height: auto; /* 高さは自動で調整（縦横比を維持）*/
+  border-radius: 8px; /* 角を丸くする */
+  object-fit: cover; /* 画像の比率を保ったまま領域を埋める */
+  max-height: 250px; /* 画像が大きすぎる場合に高さを制限（任意） */
+}
+
+/* --- ▼▼▼ ここから管理画面用のCSSを追記 ▼▼▼ --- */
+
+/* --- 1. 管理者ログインページ (admin_login.php) --- */
+
+.admin-login-body {
+  background-color: #f0f2f5; /* 背景色を画像に合わせる */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  padding: 20px;
+  box-sizing: border-box;
+  /* bodyタグに直接適用するため、既存のbodyスタイルと競合する可能性あり */
+  /* もし既存のbodyスタイルを上書きしたくない場合は、
+     .admin-login-body を別タグ(div)にして調整してください */
+}
+
+.admin-login-container {
+  width: 100%;
+  max-width: 400px;
+  text-align: center;
+  /* .container とは別のコンテナ定義 */
+}
+
+.admin-login-box {
+  background-color: var(--white);
+  padding: 30px;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+  margin-bottom: 20px;
+}
+
+.admin-login-logo {
+  font-size: 24px;
+  font-weight: 600;
+  color: var(--auth-text-dark);
+  margin: 0 0 15px 0;
+}
+
+.admin-login-lead {
+  font-size: 14px;
+  color: #555;
+  margin-bottom: 20px;
+}
+
+/* エラーメッセージ (login-register.php から流用・調整) */
+.admin-error-message {
+  color: #D8000C; 
+  background-color: #FFBABA; 
+  border: 1px solid #D8000C;
+  padding: 10px; 
+  margin-bottom: 20px; 
+  border-radius: 5px;
+  text-align: left;
+  font-size: 14px;
+}
+.admin-error-message p {
+  margin: 0;
+}
+
+.admin-form-group {
+  margin-bottom: 15px;
+  text-align: left;
+}
+.admin-form-group label {
+  display: block;
+  font-size: 14px;
+  font-weight: 600;
+  margin-bottom: 5px;
+  color: #333;
+}
+.admin-form-group input[type="email"],
+.admin-form-group input[type="password"] {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 16px;
+  box-sizing: border-box;
+}
+
+.admin-form-group-checkbox {
+  text-align: left;
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  font-size: 14px;
+}
+.admin-form-group-checkbox input {
+  margin-right: 8px;
+  accent-color: var(--brand-red);
+}
+
+.admin-login-button {
+  width: 100%;
+  padding: 12px;
+  border: none;
+  border-radius: 5px;
+  background-color: #007bff; /* 画像の青色を参考 */
+  color: white;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+.admin-login-button:hover {
+  background-color: #0056b3;
+}
+
+.admin-login-footer {
+  font-size: 12px;
+  color: #888;
+}
+
+
+/* --- 2. 管理ダッシュボード (admin_dashboard.php) --- */
+.admin-dash-body {
+  background-color: #f7f7f7; /* 他のページと背景色を合わせる */
+  /* 既存のbody設定を上書き */
+  padding: 0; 
+  justify-content: flex-start;
+  align-items: flex-start;
+}
+
+.admin-dash-container {
+  width: 100%;
+  max-width: 1000px; /* PCでの閲覧を想定し、幅を広げる */
+  margin: 20px auto;
+  padding: 20px;
+  background-color: var(--white);
+  border-radius: 8px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+  /* .container とは別のコンテナ定義 */
+  min-height: auto; 
+  border: none;
+  overflow: visible;
+}
+
+/* ヘッダー */
+.admin-dash-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 15px;
+  border-bottom: 1px solid #e0e0e0;
+}
+.admin-dash-header h2 {
+  margin: 0;
+  font-size: 24px;
+}
+
+/* 汎用ボタン (プライマリ) */
+.admin-button-primary {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 8px 12px;
+  font-size: 14px;
+  font-weight: 600;
+  border-radius: 5px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+}
+.admin-button-primary:hover {
+  background-color: #0056b3;
+}
+/* 汎用ボタン (アイコンのみ) */
+.admin-button-icon {
+  background: none;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 5px 8px;
+  cursor: pointer;
+}
+.admin-button-icon:hover {
+  background-color: #f0f0f0;
+}
+
+
+/* フィルター */
+.admin-filter-box {
+  background-color: #fdfdfd;
+  border: 1px solid #e0e0e0;
+  border-radius: 5px;
+  padding: 15px;
+  margin: 20px 0;
+  font-size: 14px;
+}
+.admin-filter-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap; /* スマホ表示用に折り返し */
+}
+.admin-filter-label {
+  font-weight: 600;
+  margin-right: 10px;
+}
+.admin-filter-row select {
+  padding: 5px 8px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+.admin-filter-add {
+  margin-left: auto; /* 右端に配置 */
+}
+
+/* ユーザー一覧テーブル */
+.admin-table-container {
+  width: 100%;
+  overflow-x: auto; /* スマホなどで見切れた場合にスクロール */
+}
+.admin-table-container table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+}
+.admin-table-container th,
+.admin-table-container td {
+  padding: 12px 10px;
+  text-align: left;
+  border-bottom: 1px solid #e0e0e0;
+  white-space: nowrap; /* 折り返し禁止 */
+}
+.admin-table-container th {
+  background-color: #f9f9f9;
+  font-weight: 600;
+  color: #555;
+}
+
+/* バッジ (システム管理者) */
+.admin-badge-success {
+  background-color: #E8F5E9; /* style.cssの .status-tag.visited を参考 */
+  color: #2E7D32;
+  padding: 3px 8px;
+  border-radius: 12px;
+  font-size: 12px;
+  font-weight: 600;
+}
+.admin-badge-default {
+  background-color: #f0f0f0;
+  color: #555;
+  padding: 3px 8px;
+  border-radius: 12px;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+/* アクションボタン (右端の ... ) */
+.admin-action-cell {
+  text-align: right;
+}
+.admin-action-dropdown {
+  position: relative;
+  display: inline-block;
+}
+.admin-button-icon-menu {
+  background: none;
+  border: none;
+  font-size: 16px;
+  cursor: pointer;
+  padding: 5px 10px;
+  border-radius: 5px;
+}
+.admin-button-icon-menu:hover {
+  background-color: #f0f0f0;
+}
+.admin-dropdown-content {
+  display: none;
+  position: absolute;
+  right: 0;
+  top: 30px;
+  background-color: var(--white);
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  z-index: 10;
+  min-width: 100px;
+  overflow: hidden;
+}
+/* ホバーでドロップダウン表示 */
+.admin-action-dropdown:hover .admin-dropdown-content {
+  display: block;
+}
+.admin-dropdown-content a,
+.admin-dropdown-item-delete {
+  display: block;
+  padding: 10px 15px;
+  text-decoration: none;
+  color: var(--auth-text-dark);
+  font-size: 14px;
+  background: none;
+  border: none;
+  width: 100%;
+  text-align: left;
+  cursor: pointer;
+}
+.admin-dropdown-content a:hover,
+.admin-dropdown-item-delete:hover {
+  background-color: #f5f5f5;
+}
+.admin-dropdown-item-delete {
+  color: var(--brand-red); /* 削除は赤字に */
+}
+
+
+/* フッター (ページネーション / エクスポート) */
+.admin-dash-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 20px;
+  padding-top: 15px;
+  border-top: 1px solid #e0e0e0;
+  font-size: 14px;
+  color: #555;
+}
+.admin-export a {
+  color: #007bff;
+  text-decoration: none;
+}
+.admin-export a:hover {
+  text-decoration: underline;
+}
+
+
+/* --- ▼▼▼ ここから追記 ▼▼▼ --- */
+
+/* 汎用ボタン (DANGER / ログアウトボタン用) */
+.admin-button-danger {
+  background-color: var(--brand-red); /* 既存のテーマカラー（赤）を使用 */
+  color: white;
+  border: none;
+  padding: 8px 12px;
+  font-size: 14px;
+  font-weight: 600;
+  border-radius: 5px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  text-decoration: none;
+}
+.admin-button-danger:hover {
+  background-color: #B71C1C; /* 既存の .new-auth-button:hover と同じ色 */
+}
+
+/* ヘッダーのボタン間の隙間調整 */
+.admin-header-actions {
+  display: flex;
+  gap: 10px; /* ボタン同士の隙間をあける */
+}
